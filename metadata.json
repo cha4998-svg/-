@@ -1,0 +1,6 @@
+{
+  "name": "Realtime English Word Quiz Game",
+  "description": "중학교 1학년 영어 교과과정 실시간 인터랙티브 단어 퀴즈 게임 (교사 메인 화면과 학생 태블릿 실시간 연동)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

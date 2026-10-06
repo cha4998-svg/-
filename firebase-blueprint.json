@@ -1,0 +1,99 @@
+{
+  "entities": {
+    "GameRoom": {
+      "title": "GameRoom",
+      "description": "실시간 단어 퀴즈 게임 방 정보",
+      "type": "object",
+      "properties": {
+        "roomId": {
+          "type": "string",
+          "description": "고유 방 ID"
+        },
+        "pin": {
+          "type": "string",
+          "description": "6자리 숫자 룸 PIN"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["lobby", "question", "review", "ended"],
+          "description": "게임 상태"
+        },
+        "selectedUnitId": {
+          "type": "string",
+          "description": "선택된 단원 ID"
+        },
+        "selectedUnitTitle": {
+          "type": "string",
+          "description": "선택된 단원 제목"
+        },
+        "timeLimit": {
+          "type": "number",
+          "description": "문제당 제한시간 (초)"
+        },
+        "currentQuestionIndex": {
+          "type": "number",
+          "description": "현재 문제 인덱스"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "방 생성 시각"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "방 업데이트 시각"
+        }
+      },
+      "required": ["roomId", "pin", "status", "selectedUnitId", "selectedUnitTitle"]
+    },
+    "QuizReport": {
+      "title": "QuizReport",
+      "description": "퀴즈 완료 후 저장되는 최종 성적표 리포트",
+      "type": "object",
+      "properties": {
+        "reportId": {
+          "type": "string",
+          "description": "리포트 ID"
+        },
+        "unitTitle": {
+          "type": "string",
+          "description": "퀴즈 단원 이름"
+        },
+        "totalQuestions": {
+          "type": "number",
+          "description": "총 문제 수"
+        },
+        "totalStudents": {
+          "type": "number",
+          "description": "참가 학생 수"
+        },
+        "topScorer": {
+          "type": "string",
+          "description": "1위 학생 이름"
+        },
+        "leaderboard": {
+          "type": "array",
+          "description": "최종 순위 및 점수 배열"
+        },
+        "completedAt": {
+          "type": "string",
+          "description": "완료 일시"
+        }
+      },
+      "required": ["reportId", "unitTitle", "totalQuestions", "totalStudents"]
+    }
+  },
+  "firestore": {
+    "/gameRooms/{roomId}": {
+      "schema": {
+        "$ref": "#/entities/GameRoom"
+      },
+      "description": "실시간 진행 및 최근 게임 룸 상태 저장"
+    },
+    "/quizReports/{reportId}": {
+      "schema": {
+        "$ref": "#/entities/QuizReport"
+      },
+      "description": "퀴즈 완료 이력 및 교사용 성적표 저장소"
+    }
+  }
+}
